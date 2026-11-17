@@ -1,0 +1,155 @@
+/* Ciberseguridad — mismo lenguaje visual que Dashboard y Monitoreo.
+   Reemplaza el bloque ESTILOS que vivía dentro de Ciberseguridad.jsx.
+   Conserva todas las clases cy-* (las usan UsuariosRoles e IntegridadMensajes). */
+
+.cy-module { width: 100%; max-width: 1480px; margin: 0 auto; color: #17335b; font-family: inherit; font-size: 15px; }
+.cy-module * { box-sizing: border-box; }
+.cy-muted { color: #6780a2; }
+
+/* Encabezado */
+.cy-header { display: flex; justify-content: space-between; align-items: flex-start; gap: 20px; flex-wrap: wrap; margin: 0 4px 24px; }
+.cy-header h1 { font-size: 36px; line-height: 1.2; letter-spacing: -1.1px; font-weight: 800; margin: 0 0 7px; color: #112b50; }
+.cy-sub { display: flex; align-items: center; gap: 9px; margin: 0; color: #587198; font-size: 16px; }
+.cy-sub svg { color: #1b75d3; flex: none; }
+.cy-chip { display: inline-flex; align-items: center; gap: 9px; padding: 12px 16px; background: #ffffffb8; border: 1px solid #c7dcf8; box-shadow: 0 4px 14px #1a569211; color: #58749f; border-radius: 13px; white-space: nowrap; font-size: 14px; }
+.cy-chip svg { color: #1b75d3; }
+.cy-back { font: inherit; font-weight: 800; color: #1269d0; background: none; border: none; padding: 0; cursor: pointer; }
+.cy-back:hover { color: #0754b8; text-decoration: underline; }
+
+/* Tarjetas de métricas */
+.cy-stats { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 17px; margin-bottom: 20px; }
+.cy-stat { position: relative; overflow: hidden; display: flex; align-items: flex-start; gap: 14px; min-height: 108px; padding: 20px; border-radius: 17px; border: 1px solid #d8e7f9; background: #ffffffeb; box-shadow: 0 5px 20px #1644740c; }
+.cy-stat::after { content: ""; position: absolute; right: -18px; bottom: -52px; width: 60%; height: 80px; background: #d8ebff; border-radius: 65% 40% 0 0; pointer-events: none; }
+.cy-stat-red::after { background: #ffe4e7; }
+.cy-stat-amber::after { background: #fff1d3; }
+.cy-stat-green::after { background: #dcf6e8; }
+.cy-stat-icon { flex: none; width: 44px; height: 44px; display: grid; place-items: center; border-radius: 13px; background: #e4f1ff; color: #0965c6; }
+.cy-stat-red .cy-stat-icon { background: #ffe7e9; color: #c7272d; }
+.cy-stat-amber .cy-stat-icon { background: #fff1d6; color: #b4730a; }
+.cy-stat-green .cy-stat-icon { background: #dcf6e8; color: #167c40; }
+.cy-stat-info { position: relative; z-index: 1; min-width: 0; display: flex; flex-direction: column; gap: 8px; }
+.cy-stat-info > span { color: #4e658a; font-size: 14px; }
+.cy-stat-info > strong { font-size: 29px; font-weight: 800; line-height: 1.1; color: #122d55; }
+
+/* Columnas y paneles */
+.cy-cols { display: grid; gap: 18px; margin-bottom: 18px; }
+.cy-wide { grid-template-columns: minmax(0, 1.55fr) minmax(310px, 1fr); }
+.cy-two { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+.cy-panel { position: relative; min-width: 0; margin-bottom: 18px; padding: 23px; border: 1px solid #d7e6f8; border-radius: 18px; background: #ffffffdc; box-shadow: 0 6px 19px #23558b0d; }
+.cy-cols .cy-panel { margin-bottom: 0; }
+.cy-cols > div > .cy-panel:not(:last-child) { margin-bottom: 18px; }
+.cy-panel-head { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-bottom: 16px; }
+.cy-panel h2 { display: flex; align-items: center; gap: 12px; margin: 0; font-size: 19px; font-weight: 750; letter-spacing: -0.3px; color: #12335f; }
+.cy-panel h2 svg { color: #0969c9; flex: none; }
+.cy-flush { padding: 0; overflow: hidden; }
+.cy-flush .cy-panel-head { padding: 20px 24px 14px; margin: 0; }
+.cy-flush .cy-table th, .cy-flush .cy-table td { padding: 14px 24px; }
+.cy-scroll { overflow-x: auto; }
+
+/* Tablas */
+.cy-table { border-collapse: collapse; width: 100%; text-align: left; white-space: nowrap; }
+.cy-table th { font-weight: 650; color: #587198; background: #f1f7ff; font-size: 13px; }
+.cy-table td, .cy-table th { padding: 14px 18px; border-bottom: 1px solid #dce6f2; }
+.cy-table td { font-size: 14px; }
+.cy-table tbody tr:last-child td { border-bottom: 0; }
+.cy-row-click { cursor: pointer; }
+.cy-row-click:hover, .cy-row-click:focus-visible { background: #eef6ff; outline: none; }
+.cy-selected { background: #e4f1ff; }
+
+/* Badges con punto */
+.cy-pill { display: inline-flex; align-items: center; gap: 8px; border-radius: 11px; padding: 6px 12px; font-size: 13px; font-weight: 700; white-space: nowrap; }
+.cy-dot { width: 8px; height: 8px; border-radius: 50%; background: currentColor; flex: none; }
+.cy-red { background: #ffe4e7; color: #c83239; }
+.cy-green { background: #dcf6e8; color: #167c40; }
+.cy-amber { background: #fff0d6; color: #a56600; }
+.cy-neutral { background: #eaf0f8; color: #587198; }
+.cy-blue { background: #e4f0ff; color: #1b67c3; }
+
+.cy-text-btn { background: none; border: 0; color: #1269d0; cursor: pointer; font: inherit; font-weight: 700; padding: 0; }
+.cy-text-btn:hover { text-decoration: underline; }
+.cy-sort { background: none; border: 0; padding: 0; font: inherit; font-weight: 650; color: inherit; cursor: pointer; }
+.cy-sort:hover { color: #1269d0; }
+.cy-sort span { font-size: 11px; color: #93aecb; }
+
+/* Gráficas */
+.cy-chart { width: 100%; height: auto; display: block; }
+.cy-chart-box { width: 100%; min-width: 0; }
+.cy-bars {
+  height: 290px; display: flex; justify-content: space-around; align-items: stretch;
+  padding: 12px 16px 0; margin-top: 6px; border-bottom: 1px solid #b7c9e2;
+  background: repeating-linear-gradient(to top, transparent 0, transparent calc(25% - 1px), #e3edf9 calc(25% - 1px), #e3edf9 25%);
+}
+.cy-bar-cell { flex: 1; display: flex; align-items: center; justify-content: flex-end; flex-direction: column; gap: 8px; min-width: 0; }
+.cy-bar { width: min(60%, 46px); min-height: 0; border-radius: 8px 8px 0 0; }
+.cy-bar-cell small { font-size: 12px; color: #607695; height: 20px; }
+
+/* Actividad sospechosa */
+.cy-activity { display: flex; align-items: center; justify-content: space-between; padding: 13px 0; border-bottom: 1px solid #dce6f2; gap: 10px; }
+.cy-activity:last-child { border-bottom: 0; padding-bottom: 2px; }
+.cy-activity button { border: 0; background: none; color: #17335d; font: inherit; font-weight: 650; text-align: left; cursor: pointer; padding: 0; }
+.cy-activity button:hover { color: #1269d0; text-decoration: underline; }
+
+/* Barras de progreso */
+.cy-progress { margin: 18px 0 24px; }
+.cy-progress > div:first-child { display: flex; justify-content: space-between; gap: 10px; margin-bottom: 8px; font-weight: 650; color: #12335f; }
+.cy-progress > div:first-child span { color: #587198; font-weight: 400; }
+.cy-track { height: 10px; border-radius: 20px; background: #e1ebf8; overflow: hidden; }
+.cy-track > div { height: 100%; border-radius: 20px; }
+.cy-bottom-note { margin-top: 40px; }
+
+/* Filtros y botones */
+.cy-filters { display: flex; flex-wrap: wrap; gap: 12px; margin-bottom: 20px; }
+.cy-filters input, .cy-filters select, .cy-dialog input, .cy-dialog select { font: inherit; font-size: 14px; border: 1px solid #c7dcf8; border-radius: 12px; padding: 11px 14px; background: #ffffffe6; color: #17335b; min-width: 0; }
+.cy-filters input { width: 315px; max-width: 100%; }
+.cy-filters select { width: 170px; }
+.cy-filters button, .cy-actions button, .cy-pagination button {
+  font: inherit; font-size: 14px; font-weight: 650; cursor: pointer; display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+  border: 1px solid #c7dcf8; background: #ffffffd9; color: #0f5fc0; border-radius: 12px; padding: 11px 18px; box-shadow: 0 3px 10px #1a569210;
+}
+.cy-filters button:hover:not(:disabled), .cy-actions button:hover:not(:disabled), .cy-pagination button:hover:not(:disabled) { background: #eaf4ff; border-color: #80b7f0; }
+.cy-filters .cy-export { margin-left: auto; }
+.cy-filters .cy-primary, .cy-actions .cy-primary { background: linear-gradient(135deg, #1a69ce, #0754b8); border-color: transparent; color: #fff; }
+.cy-actions { display: flex; flex-wrap: wrap; gap: 14px; margin-top: 20px; }
+.cy-actions button { min-width: 180px; flex: 0 1 260px; }
+.cy-actions button:disabled, .cy-pagination button:disabled { opacity: 0.5; cursor: not-allowed; }
+.cy-access-panel { padding: 0; min-height: 400px; overflow: hidden; display: flex; flex-direction: column; }
+.cy-access-panel .cy-pagination { padding: 18px 24px; }
+.cy-pagination { display: flex; align-items: center; justify-content: space-between; gap: 18px; color: #587198; font-size: 13px; margin-top: auto; }
+.cy-pagination > div { display: flex; gap: 10px; }
+
+/* Detalle / permisos / modal */
+.cy-info-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 14px; margin: 20px 0 28px; }
+.cy-info-grid > div { display: flex; flex-direction: column; gap: 8px; min-width: 0; overflow-wrap: anywhere; padding: 14px 16px; border-radius: 14px; border: 1px solid #d0e4fc; background: linear-gradient(155deg, #f9fcff, #e7f2ff); }
+.cy-info-grid strong { font-weight: 700; color: #12335f; }
+.cy-permissions td:not(:first-child), .cy-permissions th:not(:first-child) { text-align: center; }
+.cy-overlay { position: fixed; z-index: 1000; inset: 0; background: #0a1f3d66; display: flex; justify-content: center; align-items: center; padding: 20px; }
+.cy-dialog { background: #fff; border-radius: 18px; padding: 28px; display: flex; flex-direction: column; gap: 18px; width: min(480px, 100%); box-shadow: 0 20px 60px #0a1f3d40; }
+.cy-dialog h2 { font-size: 22px; margin: 0; color: #112b50; }
+.cy-dialog label { display: flex; flex-direction: column; gap: 8px; }
+.cy-module button:focus-visible, .cy-module input:focus-visible, .cy-module select:focus-visible, .cy-module tr:focus-visible { outline: 3px solid #2c80d5; outline-offset: 2px; }
+
+/* Barra de estado inferior */
+.cy-statusbar { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 14px; margin-top: 18px; padding: 15px 20px; border: 1px solid #d7e6f8; border-radius: 16px; background: #ffffffdb; box-shadow: 0 5px 19px #23558b0d; color: #4f6587; font-size: 13px; }
+.cy-statusbar > div { display: flex; align-items: center; flex-wrap: wrap; gap: 13px; }
+.cy-statusbar strong { color: #154681; }
+.cy-pipe { height: 17px; width: 1px; background: #a9bfdb; }
+.cy-stable { display: inline-flex; align-items: center; gap: 8px; padding: 8px 12px; background: #e5f1ff; border-radius: 10px; color: #155aaa; font-weight: 700; }
+
+@media (max-width: 1150px) {
+  .cy-wide, .cy-two { grid-template-columns: 1fr; }
+  .cy-stats { grid-template-columns: repeat(2, 1fr); }
+  .cy-info-grid { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 640px) {
+  .cy-header h1 { font-size: 28px; }
+  .cy-chip { white-space: normal; }
+  .cy-stats { gap: 10px; }
+  .cy-stat { padding: 15px; }
+  .cy-stat-info > strong { font-size: 23px; }
+  .cy-panel { padding: 16px; }
+  .cy-flush { padding: 0; }
+  .cy-filters input, .cy-filters select, .cy-filters button { width: 100%; margin-left: 0 !important; }
+  .cy-info-grid { grid-template-columns: 1fr; }
+  .cy-actions button { flex-basis: 100%; }
+  .cy-pagination { flex-wrap: wrap; }
+}

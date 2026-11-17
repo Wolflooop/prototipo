@@ -1,0 +1,11 @@
+/* Estilos de la pantalla "Simular lectura" (Inteligencia Artificial) */
+.ia-hint { font-size: 13px; color: #9a998f; }
+.ia-error { padding: 12px 15px; background: #fdeaea; border-radius: 8px; color: #b82e2e; font-size: 15px; margin: 0 0 18px; }
+.ia-presets { display: flex; flex-wrap: wrap; align-items: center; gap: 10px; margin: 0 0 22px; }
+.ia-presets > span { color: #77756e; font-size: 15px; margin-right: 4px; }
+.ia-presets .ia-button { min-width: 0; padding: 9px 16px; }
+.ia-form-grid input.invalid { border-color: #d33; }
+.ia-sim-clase { font-size: 24px; margin: 4px 0 14px; }
+.ia-sim-vacio { color: #94938d; padding: 30px 0; text-align: center; }
+.ia-submit { border: 1px solid #1e62a6; border-radius: 9px; padding: 13px 20px; background: #1e62a6; color: #fff; min-width: 165px; font: inherit; cursor: pointer; }
+.ia-submit:hover { background: #16518c; }

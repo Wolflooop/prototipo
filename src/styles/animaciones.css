@@ -1,0 +1,211 @@
+/* ==========================================================================
+   animaciones.css
+   Animaciones e interacciones de: Inteligencia Artificial, Centro de alertas
+   y Reportes. Se importa una sola vez en main.jsx.
+
+   Cómo se usa:
+   - .anim-scope  -> raíz de la sección (activa hover, foco, filas, etc.)
+   - .anim-vista  -> contenedor con key={vista}: anima cada cambio de pantalla
+   - .anim-*      -> clases sueltas para barras, líneas, modales, etc.
+   Todo respeta "reducir movimiento" del sistema (al final del archivo).
+   ========================================================================== */
+
+:root {
+  --anim-ease: cubic-bezier(0.2, 0.8, 0.2, 1);
+  --anim-azul: 29, 100, 168;
+}
+
+/* ---------- Keyframes ---------- */
+@keyframes anim-subir   { from { opacity: 0; transform: translateY(14px); } }
+@keyframes anim-entrar  { from { opacity: 0; transform: translateX(-12px); } }
+@keyframes anim-aparecer{ from { opacity: 0; } }
+@keyframes anim-pop     { from { opacity: 0; transform: translateY(12px) scale(0.96); } }
+@keyframes anim-crecerX { from { transform: scaleX(0); } }
+@keyframes anim-crecerY { from { transform: scaleY(0); } }
+@keyframes anim-dibujar { from { stroke-dashoffset: 1; } }
+@keyframes anim-celda   { from { opacity: 0; transform: scale(0.7); } }
+@keyframes anim-pulso   { 0%, 100% { transform: scale(1); opacity: 1; } 50% { transform: scale(1.35); opacity: 0.45; } }
+@keyframes anim-aviso   { from { opacity: 0; transform: translateY(-6px); } }
+
+/* ---------- Cambio de pantalla + entrada escalonada ---------- */
+.anim-vista { animation: anim-aparecer 0.25s ease both; }
+
+.anim-vista :is(section, aside, article, .ia-box, .ia-metric):not([role="dialog"]) {
+  animation: anim-subir 0.5s var(--anim-ease) backwards;
+}
+.anim-vista :is(section, aside, article, .ia-box, .ia-metric):nth-child(2) { animation-delay: 60ms; }
+.anim-vista :is(section, aside, article, .ia-box, .ia-metric):nth-child(3) { animation-delay: 120ms; }
+.anim-vista :is(section, aside, article, .ia-box, .ia-metric):nth-child(4) { animation-delay: 180ms; }
+.anim-vista :is(section, aside, article, .ia-box, .ia-metric):nth-child(n+5) { animation-delay: 240ms; }
+
+/* Hoja de la vista previa del reporte */
+.anim-hoja { animation: anim-pop 0.6s var(--anim-ease) 0.1s backwards; }
+
+/* Elementos sueltos (línea de tiempo, eventos relacionados) */
+.anim-item { animation: anim-entrar 0.45s var(--anim-ease) backwards; }
+
+/* ---------- Tablas ---------- */
+.anim-scope tbody tr {
+  animation: anim-subir 0.4s var(--anim-ease) backwards;
+  transition: background-color 0.2s ease, filter 0.2s ease;
+}
+.anim-scope tbody tr:nth-child(1) { animation-delay: 40ms; }
+.anim-scope tbody tr:nth-child(2) { animation-delay: 80ms; }
+.anim-scope tbody tr:nth-child(3) { animation-delay: 120ms; }
+.anim-scope tbody tr:nth-child(4) { animation-delay: 160ms; }
+.anim-scope tbody tr:nth-child(5) { animation-delay: 200ms; }
+.anim-scope tbody tr:nth-child(6) { animation-delay: 240ms; }
+.anim-scope tbody tr:nth-child(7) { animation-delay: 280ms; }
+.anim-scope tbody tr:nth-child(n+8) { animation-delay: 320ms; }
+.anim-scope tbody tr[style*="cursor: pointer"]:hover,
+.anim-scope tbody tr.clickable:hover { filter: brightness(0.96); }
+
+/* ---------- Botones ---------- */
+.anim-scope button {
+  transition: transform 0.15s var(--anim-ease), box-shadow 0.2s ease, filter 0.2s ease,
+    background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease, opacity 0.2s ease;
+}
+.anim-scope button:not(:disabled):not(.anim-link):not(.anim-nolift):not(.ia-bread):not(.ia-inline-link):not([aria-label="Cerrar"]):hover {
+  transform: translateY(-2px);
+  filter: brightness(0.97);
+  box-shadow: 0 6px 14px rgba(0, 0, 0, 0.1);
+}
+.anim-scope button:not(:disabled):not(.anim-link):not(.anim-nolift):active { transform: translateY(0) scale(0.97); box-shadow: none; }
+.anim-scope .anim-link:hover { text-decoration: underline; }
+
+/* Gráfica de barras clicable (IA): se resalta sin "saltar" */
+.anim-scope .anim-nolift:hover { filter: brightness(1.08); }
+
+/* ---------- Campos de formulario ---------- */
+.anim-scope :is(input, select, textarea) {
+  transition: box-shadow 0.2s ease, background-color 0.2s ease;
+}
+.anim-scope :is(input, select, textarea):focus {
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(var(--anim-azul), 0.22);
+}
+.anim-scope :is(input[type="checkbox"], input[type="range"]) { transition: transform 0.15s ease; }
+.anim-scope input[type="checkbox"]:active { transform: scale(0.85); }
+
+/* ---------- Barras de progreso / gráficas ---------- */
+.anim-barra-fill { transform-origin: left center; animation: anim-crecerX 0.9s var(--anim-ease) 0.15s backwards; }
+.anim-barra-v    { transform-origin: bottom center; animation: anim-crecerY 0.8s var(--anim-ease) 0.15s backwards; }
+.anim-scope .ia-track > div { transform-origin: left center; animation: anim-crecerX 0.9s var(--anim-ease) 0.2s backwards; }
+.anim-barra-v:hover { filter: brightness(1.12); }
+
+.anim-linea { stroke-dasharray: 1; animation: anim-dibujar 1.2s ease-out 0.2s backwards; }
+.anim-fade  { animation: anim-aparecer 0.8s ease 0.6s backwards; }
+.anim-punto {
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: anim-pulso 1.8s ease-in-out 1.4s infinite;
+}
+
+/* ---------- Matriz de confusión ---------- */
+.anim-scope .ia-matrix-cell { transition: transform 0.2s var(--anim-ease), box-shadow 0.2s ease; animation: anim-celda 0.45s var(--anim-ease) backwards; }
+.anim-scope .ia-matrix-cell:nth-of-type(odd)  { animation-delay: 0.10s; }
+.anim-scope .ia-matrix-cell:nth-of-type(even) { animation-delay: 0.22s; }
+.anim-scope .ia-matrix-cell:hover { transform: scale(1.07); box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15); position: relative; z-index: 1; }
+
+/* ---------- Flujo de preparación de datos (IA) ---------- */
+.anim-scope .ia-flow-item { animation: anim-pop 0.5s var(--anim-ease) backwards; transition: transform 0.2s var(--anim-ease), box-shadow 0.2s ease; }
+.anim-scope .ia-flow-item:hover { transform: translateY(-3px); box-shadow: 0 6px 14px rgba(0, 0, 0, 0.1); }
+.anim-scope .ia-flow > :nth-child(3) { animation-delay: 0.10s; }
+.anim-scope .ia-flow > :nth-child(5) { animation-delay: 0.20s; }
+.anim-scope .ia-flow > :nth-child(7) { animation-delay: 0.30s; }
+.anim-scope .ia-flow > :nth-child(9) { animation-delay: 0.40s; }
+
+/* ---------- Tarjetas de métricas: hover suave ---------- */
+.anim-scope .ia-metric, .anim-scope .anim-metrica { transition: transform 0.2s var(--anim-ease), box-shadow 0.2s ease; }
+.anim-scope .ia-metric:hover, .anim-scope .anim-metrica:hover { transform: translateY(-3px); box-shadow: 0 8px 18px rgba(0, 0, 0, 0.08); }
+
+/* ---------- Mensajes de estado ---------- */
+.anim-scope p[role="status"], .anim-scope .ia-notice { animation: anim-aviso 0.35s var(--anim-ease) backwards; }
+
+/* ---------- Modales ---------- */
+.anim-overlay { animation: anim-aparecer 0.2s ease backwards; }
+.anim-modal   { animation: anim-pop 0.3s var(--anim-ease) backwards; }
+
+/* ---------- Reducir movimiento (accesibilidad) ---------- */
+@media (prefers-reduced-motion: reduce) {
+  .anim-scope *, .anim-scope *::before, .anim-scope *::after,
+  .anim-vista, .anim-overlay, .anim-modal, .anim-barra-fill, .anim-barra-v,
+  .anim-linea, .anim-fade, .anim-punto, .anim-item, .anim-hoja {
+    animation: none !important;
+    transition: none !important;
+  }
+}
+
+/* ==========================================================================
+   AGREGADO — Monitoreo y Ciberseguridad
+   Pega este bloque AL FINAL de frontend/src/styles/animaciones.css
+   (no modifica nada de lo que ya existe).
+   ========================================================================== */
+
+/* Entrada escalonada para grids de tarjetas: <div class="anim-stagger"> y en cada hijo style={{"--i": n}} */
+.anim-stagger > * {
+  animation: anim-subir 0.5s var(--anim-ease) backwards;
+  animation-delay: calc(var(--i, 0) * 70ms + 40ms);
+}
+
+/* ---------- Tooltip de gráficas de línea (GraficaHover) ---------- */
+.gh-wrap { position: relative; }
+.gh-wrap:focus-visible { outline: 3px solid #3989e1; outline-offset: 2px; border-radius: 8px; }
+.gh-guia { position: absolute; top: 0; bottom: 0; width: 0; border-left: 1px dashed #9db8d6; pointer-events: none; }
+.gh-punto {
+  position: absolute; width: 13px; height: 13px; border-radius: 50%;
+  background: #fff; border: 3px solid #1e62a6; transform: translate(-50%, -50%);
+  pointer-events: none; box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+}
+.gh-tip {
+  position: absolute; z-index: 6; transform: translate(16px, -50%);
+  background: #1f2a37; color: #fff; border-radius: 9px; padding: 9px 13px;
+  font-size: 13px; line-height: 1.5; white-space: nowrap; pointer-events: none;
+  display: flex; flex-direction: column; gap: 2px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.22); animation: anim-aparecer 0.12s ease;
+}
+.gh-tip.izq { transform: translate(calc(-100% - 16px), -50%); }
+.gh-tip strong { font-weight: 600; color: #b9d4f1; }
+.gh-tip i { display: inline-block; width: 8px; height: 8px; border-radius: 50%; margin-right: 7px; }
+
+/* ---------- Tooltip de barras (Ciberseguridad) ---------- */
+.gh-barcell { position: relative; outline: none; }
+.gh-barcell::after {
+  content: attr(data-tip); position: absolute; left: 50%; top: 0;
+  transform: translate(-50%, -60%); background: #1f2a37; color: #fff;
+  font-size: 13px; line-height: 1; padding: 8px 11px; border-radius: 8px;
+  white-space: nowrap; opacity: 0; pointer-events: none; z-index: 5;
+  transition: opacity 0.15s ease; box-shadow: 0 8px 20px rgba(0, 0, 0, 0.22);
+}
+.gh-barcell:hover::after, .gh-barcell:focus-visible::after { opacity: 1; }
+.gh-barcell:hover .cy-bar, .gh-barcell:focus-visible .cy-bar { filter: brightness(1.12); }
+.gh-barcell:focus-visible { outline: 3px solid #3989e1; outline-offset: 2px; border-radius: 6px; }
+
+/* ---------- Indicador "En vivo" ---------- */
+.gh-live {
+  display: inline-block; width: 9px; height: 9px; border-radius: 50%;
+  background: #4caf50; margin-right: 8px; animation: anim-pulso 1.8s ease-in-out infinite;
+}
+
+/* ---------- Botones que son enlaces/interruptores: sin "salto" al pasar el mouse ---------- */
+.anim-scope button.mon-crumb:hover, .anim-scope button.cy-back:hover,
+.anim-scope button.cy-text-btn:hover, .anim-scope .cy-activity button:hover,
+.anim-scope button.cy-sort:hover, .anim-scope button.mon-switch:hover,
+.anim-scope button.mon-crumb:active, .anim-scope button.cy-back:active,
+.anim-scope button.cy-text-btn:active, .anim-scope .cy-activity button:active,
+.anim-scope button.cy-sort:active, .anim-scope button.mon-switch:active {
+  transform: none !important; box-shadow: none !important; filter: none !important;
+}
+
+/* ---------- Modal de Ciberseguridad (Usuarios y roles) ---------- */
+.cy-overlay { animation: anim-aparecer 0.2s ease backwards; }
+.cy-dialog  { animation: anim-pop 0.3s var(--anim-ease) backwards; }
+
+/* ---------- Reducir movimiento ---------- */
+@media (prefers-reduced-motion: reduce) {
+  .anim-stagger > *, .gh-live, .gh-tip, .cy-overlay, .cy-dialog {
+    animation: none !important;
+    transition: none !important;
+  }
+  .gh-barcell::after { transition: none !important; }
+}
